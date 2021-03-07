@@ -6,8 +6,10 @@ import (
 	"log"
 	"net/http"
 	"os"
-
+	// curl "github.com/andelf/go-curl"
 	"github.com/urfave/cli/v2"
+	"os/exec"
+
 )
 
 func main() {
@@ -32,6 +34,7 @@ func main() {
 			// }
 			DownloadFile("wordpress.nomad", fileUrl)
 			fmt.Println("Downloading", fileUrl)
+			runFormulae()
 			return nil
 		},
 	}
@@ -40,6 +43,18 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+}
+
+func runFormulae() error{
+	cmd := exec.Command("sudo", "python3", "/home/rtan/Work_dir/Nomad/ndr/formulae.py")
+	out, err := cmd.Output()
+
+	if err != nil {
+    	println(err.Error())
+    	return err
+	}
+	fmt.Println("string(out)")
+	return nil
 }
 
 func DownloadFile(filepath string, url string) error {
