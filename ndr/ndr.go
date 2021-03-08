@@ -7,8 +7,8 @@ import (
 	"net/http"
 	"os"
 	// curl "github.com/andelf/go-curl"
-	//"github.com/urfave/cli/v2"
-	"https://github.com/urfave/cli/blob/master/docs/v2/manual.md"
+	"github.com/urfave/cli/v2"
+	//"https://github.com/urfave/cli/blob/master/docs/v2/manual.md"
 	"os/exec"
 
 )
