@@ -37,7 +37,25 @@ func main() {
 			fmt.Println("Downloading", fileUrl)
 			runFormulae()
 			return nil
-		},		
+		},
+		//Lin
+		Action: func(c *cli.Context) error {
+			fileUrl := c.String("install")
+			// if c.NArg() > 0 {
+			//   fileUrl = c.Args().Get(0)
+			// }
+			// if c.String("install") == "https://raw.githubusercontent.com/UW-Capstone-Nomad/Nomad-Deployment-Recipe/main/test/wordpress.nomad" {
+			//   DownloadFile("./", fileUrl)
+			//   fmt.Println("Downloading", fileUrl)
+			// } else {
+			//   fmt.Println("Invalid", fileUrl)
+			// }
+			DeleteFile("wordpress.nomad", fileUrl)
+			fmt.Println("Deleting", fileUrl)
+			stopFormulae()
+			return nil
+			
+			
 	}
 
 	err := app.Run(os.Args)
@@ -77,5 +95,40 @@ func DownloadFile(filepath string, url string) error {
 	// Write the body to file
 	_, err = io.Copy(out, resp.Body)
 	return err
+}
+
+
+
+
+
+
+
+//Lin
+func DeleteFile() { 
+   
+    // Removing file 
+    // Using Remove() function 
+    e := os.Remove("wordpress.nomad") 
+    //if err != nil { 
+    //    log.Fatal(e) 
+    if err != nil {
+        fmt.Println(err)
+        return
+    }
+       fmt.Println("File wordpress.nomad successfully deleted")
+  
+   }  
+}
+
+func stopFormulae() error{
+	cmd := exec.Command("nomad", "job", "stop", "wordpress.nomad")
+	out, err := cmd.Output()
+
+	if err != nil {
+    	println(err.Error())
+    	return err
+	}
+	fmt.Println("string(out)")
+	return nil
 }
 
