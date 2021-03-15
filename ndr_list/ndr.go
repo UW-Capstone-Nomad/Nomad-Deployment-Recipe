@@ -13,7 +13,7 @@ func main() {
 	app := &cli.App{
 		Flags: []cli.Flag{
 			&cli.StringFlag{
-				Name:  "info",
+				Name:  "list",
 				Value: "package",
 				Usage: "display a nomad package from source",
 			},
@@ -28,6 +28,8 @@ func main() {
 			return nil
 		},
 	}
+	
+	
 
 	err := app.Run(os.Args)
 	if err != nil {
