@@ -6,18 +6,23 @@ job "my-website" {
       port "db" {
         to = 3306
       }
+      mode = "bridge"
     }
 
     service {
       name = "my-website-db"
       port = "db"
 
-      check {
+      connect {
+        sidecar_service {}
+      }
+
+      /*check {
         type     = "tcp"
         port     = "db"
         interval = "10s"
         timeout  = "2s"
-      }
+      }*/
     }
 
     volume "my-website-db" {
@@ -58,6 +63,7 @@ job "my-website" {
       port "http" {
         to = 80
       }
+    mode = "bridge"
     }
 
     service {
@@ -65,11 +71,22 @@ job "my-website" {
       tags = ["www"]
       port = "http"
 
-      check {
+      /*check {
         type     = "tcp"
         port     = "http"
         interval = "10s"
         timeout  = "2s"
+      }*/
+
+      connect {
+        sidecar_service {
+          proxy {
+            upstreams {
+              destination_name = "my-website-db"
+              local_bind_port = 3306
+            }
+          }
+        }
       }
     }
 
@@ -79,8 +96,9 @@ job "my-website" {
       config {
         image        = "alpine:latest"
         command      = "sh"
-        args         = ["-c", "echo -n 'Waiting for service'; until nslookup -port=8600 my-website-db.service.consul ${NOMAD_IP_http} 2>&1 >/dev/null; do echo '.'; sleep 2; done"]
-        network_mode = "host"
+        #args         = ["-xc", "echo -n 'Waiting for service'; until nslookup -port=8600 my-website-db.service.consul localhost 2>&1 >/dev/null; do echo '.'; sleep 2; done"]
+        args = ["-c", "/bin/true"]
+        network_mode = "bridge"
       }
 
       resources {
