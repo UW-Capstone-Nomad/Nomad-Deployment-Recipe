@@ -17,27 +17,22 @@ func main() {
 	app := &cli.App{
 		Flags: []cli.Flag{
 			&cli.StringFlag{
-				Name:  "install",
+				Name:  "uninstall",
 				Value: "package",
-				Usage: "pull a nomad package from source",
+				Usage: "delete a nomad package from local, and stop the nomad job from cloud",
 			},
 		},
+		//Lin
 		Action: func(c *cli.Context) error {
-			fileUrl := c.String("install")
-			// if c.NArg() > 0 {
-			//   fileUrl = c.Args().Get(0)
-			// }
-			// if c.String("install") == "https://raw.githubusercontent.com/UW-Capstone-Nomad/Nomad-Deployment-Recipe/main/test/wordpress.nomad" {
-			//   DownloadFile("./", fileUrl)
-			//   fmt.Println("Downloading", fileUrl)
-			// } else {
-			//   fmt.Println("Invalid", fileUrl)
-			// }
-			DownloadFile("wordpress.nomad", fileUrl)
-			fmt.Println("Downloading", fileUrl)
-			runFormulae()
+			fileUrl := c.String("uninstall")
+			DeleteFile("wordpress.nomad", fileUrl)
+			
+			fmt.Println("Deleting", fileUrl)
+			//stopFormulae()
 			return nil
-		},		
+			},
+			
+			
 	}
 
 	err := app.Run(os.Args)
@@ -45,10 +40,25 @@ func main() {
 		log.Fatal(err)
 	}
 }
+//Lin
+func DeleteFile(filepath string, url string) error {
+    // Removing file 
+    // Using Remove() function 
+    err := os.Remove("wordpress.nomad") 
+    //if err != nil { 
+    //    log.Fatal(e) 
+    if err != nil {
+        fmt.Println(err)
+        return err
+    }
+       fmt.Println("File wordpress.nomad successfully deleted")
+	   return nil
+   }  
 
-func runFormulae() error{
-	cmd := exec.Command("sudo", "python3", "/home/rtan/Work_dir/Nomad/ndr/formulae.py")
-	out, err := cmd.Output()
+
+func stopFormulae() error{
+	cmd := exec.Command("nomad", "job", "stop", "wordpress.nomad")
+	_, err := cmd.Output()
 
 	if err != nil {
     	println(err.Error())
@@ -56,26 +66,5 @@ func runFormulae() error{
 	}
 	fmt.Println("string(out)")
 	return nil
-}
-
-func DownloadFile(filepath string, url string) error {
-
-	// Get the data
-	resp, err := http.Get(url)
-	if err != nil {
-		return err
-	}
-	defer resp.Body.Close()
-
-	// Create the file
-	out, err := os.Create(filepath)
-	if err != nil {
-		return err
-	}
-	defer out.Close()
-
-	// Write the body to file
-	_, err = io.Copy(out, resp.Body)
-	return err
 }
 
