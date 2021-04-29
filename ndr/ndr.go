@@ -11,7 +11,7 @@ import (
 	"github.com/urfave/cli/v2"
 	"strings"
 	"os/exec"
-
+	"io/ioutil"
 )
 
 func main() {
@@ -24,7 +24,7 @@ func main() {
 			// Value: "package",
 			Usage: "pull a nomad package from source",
 			Action: func(c *cli.Context) error {
-				fileUrl := c.String("install")
+				fileUrl := c.Args().Get(0)
 				// if c.NArg() > 0 {
 				//   fileUrl = c.Args().Get(0)
 				// }
@@ -36,7 +36,7 @@ func main() {
 				// }
 				DownloadFile("wordpress.nomad", fileUrl)
 				fmt.Println("Downloading", fileUrl)
-				runFormulae()
+				// runFormulae()
 				return nil
 			},		
 		},
@@ -45,19 +45,25 @@ func main() {
 			// Value: "package",
 			Usage: "display a nomad package from source",
 			Action: func(c *cli.Context) error {
-				fileUrl := c.String("info")
+				fileUrl := c.Args().Get(0)
 				fileUrl += ".nomad"
 				files, _ := filepath.Glob("*")
 				flag := false
 				for _, num := range files {
+					
 					if strings.HasSuffix(num, ".nomad") {
+						
 						if num == fileUrl {
 							fmt.Println(num)
 							fmt.Println("Installed")
 							flag = true
-							break;
+							// break;
 						} 
 							
+					}
+					if strings.Compare(num, "Formulae.txt") == 0 {
+						ReadFormulae(num)
+						// break;	
 					}
 				}
 				if (!flag) {
@@ -96,8 +102,13 @@ func runFormulae() error{
     	println(err.Error())
     	return err
 	}
-	fmt.Println("string(out)")
 	return nil
+}
+func ReadFormulae(filepath string) error {
+	data, err := ioutil.ReadFile(filepath)
+	// Get the data
+	fmt.Println(string(data))
+	return err
 }
 
 func DownloadFile(filepath string, url string) error {
@@ -115,7 +126,7 @@ func DownloadFile(filepath string, url string) error {
 		return err
 	}
 	defer out.Close()
-
+	fmt.Println(resp)
 	// Write the body to file
 	_, err = io.Copy(out, resp.Body)
 	return err

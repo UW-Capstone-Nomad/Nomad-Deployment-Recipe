@@ -1,0 +1,48 @@
+class wordpress.nomad < Formula
+  envir "Linux"
+  desc "nomad file of Wordpress"
+  homepage "https://github.com/angrycub/nomad_example_jobs/tree/main/applications/wordpress"
+  #url The URL to download the source code for the Formula! ""
+  version "0.1.0"
+
+
+  #Create a configuration file at /etc/nomad.d/client.hcl: 
+    sudo touch /etc/nomad.d/client.hcl
+    sudo vim /etc/nomad.d/client.hcl
+
+  #Add the host_volume information to the client stanza in the Nomad configuration
+  #in client.hcl
+    client {
+    enabled = true
+    host_volume "my-website-db" {
+        path = "/opt/volumes/my-website-db"
+        read_only = false
+    }
+    }
+
+  #Create a folder on one of the Nomad clients to host the registry files
+    sudo mkdir /opt/volumes/my-website-db
+
+  #Establish nomad client “https://learn.hashicorp.com/tutorials/nomad/get-started-run?in=nomad/get-started”
+  #Start nomad agent with -config to load config file (start agent)
+    sudo nomad agent -config=/etc/nomad.d/client.hcl -dev -bind 0.0.0.0 -log-level INFO
+
+  #Restart Nomad to read the new configuration
+  #run wordpress.nomad(run job file)inside wordpress.nomad dir:
+    nomad job run wordpress.nomad
+
+
+  
+  depends_on "go" => :build
+
+#  def install
+#    system "cargo", "build", "--release", "--bin", "hello"
+#    bin.install "target/release/hello"
+#  end
+
+#  test do
+#    # This test is not good!
+#    system "#{bin}/hello", "--version"
+#  end
+
+end

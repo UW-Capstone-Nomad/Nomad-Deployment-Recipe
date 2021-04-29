@@ -2,9 +2,9 @@ class wordpress.nomad < Formula
   envir "Linux"
   desc "nomad file of Wordpress"
   homepage "https://github.com/angrycub/nomad_example_jobs/tree/main/applications/wordpress"
-  #url暂时不知道The URL to download the source code for the Formula! ""
+  #url The URL to download the source code for the Formula! ""
   version "0.1.0"
-  #sha256 应该不需要
+
 
   #Create a configuration file at /etc/nomad.d/client.hcl: 
     sudo touch /etc/nomad.d/client.hcl
