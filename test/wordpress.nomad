@@ -6,16 +6,11 @@ job "my-website" {
       port "db" {
         to = 3306
       }
-      mode = "bridge"
     }
 
     service {
       name = "my-website-db"
       port = "db"
-
-      connect {
-        sidecar_service {}
-      }
 
       /*check {
         type     = "tcp"
@@ -63,7 +58,6 @@ job "my-website" {
       port "http" {
         to = 80
       }
-    mode = "bridge"
     }
 
     service {
@@ -78,16 +72,6 @@ job "my-website" {
         timeout  = "2s"
       }*/
 
-      connect {
-        sidecar_service {
-          proxy {
-            upstreams {
-              destination_name = "my-website-db"
-              local_bind_port = 3306
-            }
-          }
-        }
-      }
     }
 
     task "await-my-website" {
@@ -128,7 +112,8 @@ WORDPRESS_DB_NAME=wordpress
   EOH
 
         destination = "local/envvars.txt"
-        env = true
+        change_mode = "noop"
+        env         = true
       }
 
       config {
