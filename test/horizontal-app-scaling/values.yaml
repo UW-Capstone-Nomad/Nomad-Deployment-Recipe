@@ -1,0 +1,13 @@
+# Write the default values for your backpack here
+# It is strongly suggested to use inline documentation for quick explanations
+# otherwise the *.md files can be used for longer documentation.
+datacenters:
+ - dc1
+nginx:
+  # HTTP is enabled by default
+  http:
+    port: 80
+  # HTTPS is disabled by default
+  https:
+    enable: false
+    port: 443

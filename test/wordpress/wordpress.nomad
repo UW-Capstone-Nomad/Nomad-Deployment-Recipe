@@ -117,11 +117,9 @@ job "my-website" {
 
       template {
         data = <<EOH
-{{- if service "my-website-db" -}}
-{{- with index (service "my-website-db") 0 -}}
+
 WORDPRESS_DB_HOST={{ .Address }}:{{ .Port }}
-{{- end -}}
-{{- end }}
+
 WORDPRESS_DB_USER=wordpress
 WORDPRESS_DB_PASSWORD=wordpress
 WORDPRESS_DB_NAME=wordpress
