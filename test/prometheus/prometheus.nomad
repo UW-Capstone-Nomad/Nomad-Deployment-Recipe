@@ -1,24 +1,24 @@
 job "prometheus" {
   datacenters = ["dc1"]
-  type = "service"
+  type        = "service"
   update {
-    max_parallel = 1
+    max_parallel     = 1
     min_healthy_time = "10s"
     healthy_deadline = "3m"
-    auto_revert = false
-    canary = 0
+    auto_revert      = false
+    canary           = 0
   }
   group "monitoring" {
     count = 1
     restart {
       attempts = 10
       interval = "5m"
-      delay = "25s"
-      mode = "delay"
+      delay    = "25s"
+      mode     = "delay"
     }
     network {
       port "prometheus_ui" {
-        to = 9090 
+        to = 9090
       }
       port "grafana_ui" {
         to = 3000
@@ -41,7 +41,7 @@ job "prometheus" {
     service {
       name = "grafana-ui"
       port = "grafana_ui"
-      tags = ["urlprefix-/grafana strip=/grafana"] 
+      tags = ["urlprefix-/grafana strip=/grafana"]
       check {
         name     = "grafana-ui port alive"
         type     = "tcp"
@@ -52,13 +52,13 @@ job "prometheus" {
     ephemeral_disk { size = 1000 }
     task "grafana" {
       artifact {
-        source="https://gist.githubusercontent.com/angrycub/046cee11bd3d8c4ab9a3819646c9660c/raw/c699095c2cb25b896e2c709da588b668ce82f8b5/prometheus_nomad.json"
-        destination="local/provisioning/dashboards/dashs"
+        source      = "https://gist.githubusercontent.com/angrycub/046cee11bd3d8c4ab9a3819646c9660c/raw/c699095c2cb25b896e2c709da588b668ce82f8b5/prometheus_nomad.json"
+        destination = "local/provisioning/dashboards/dashs"
       }
       template {
-        change_mode="noop"
-        destination="local/provisioning/dashboards/file_provider.yml"
-        data = <<EOH
+        change_mode = "noop"
+        destination = "local/provisioning/dashboards/file_provider.yml"
+        data        = <<EOH
 apiVersion: 1
 providers:
 - name: 'default'
@@ -73,9 +73,9 @@ EOH
 
       }
       template {
-        change_mode="noop"
-        destination="local/provisioning/datasources/prometheus_datasource.yml"
-        data = <<EOH
+        change_mode = "noop"
+        destination = "local/provisioning/datasources/prometheus_datasource.yml"
+        data        = <<EOH
 apiVersion: 1
 datasources:
   - name: Prometheus
@@ -86,7 +86,7 @@ EOH
       }
       env {
         GF_SERVER_ROOT_URL    = "http://${NOMAD_ADDR_grafana_ui}"
-        GF_PATHS_PROVISIONING ="/${NOMAD_TASK_DIR}/provisioning"
+        GF_PATHS_PROVISIONING = "/${NOMAD_TASK_DIR}/provisioning"
       }
       driver = "docker"
       config {
@@ -96,15 +96,15 @@ EOH
     }
 
     task "prometheus" {
-       template  {
-         change_mode = "noop"
-         destination ="local/prometheus.yml"
-         data        = <<EOH
+      template {
+        change_mode = "noop"
+        destination = "local/prometheus.yml"
+        data        = <<EOH
 ---
 global:
   scrape_interval: 15s
 EOH
-    }
+      }
 
       driver = "docker"
       config {
