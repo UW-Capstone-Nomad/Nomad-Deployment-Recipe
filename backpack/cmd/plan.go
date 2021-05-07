@@ -44,61 +44,61 @@ func planRun(cmd *cobra.Command, args []string) {
 
 	client, err := conn.NewClient()
 	if err != nil {
-		log.Fatalf("1Error creating new Nomad Client: %s", err)
+		log.Fatalf("Error creating new Nomad Client: %s", err)
 	}
 
 	values := getValuesFromCLIInput(cmd)
 
 	verbosePlan, err := cmd.Flags().GetBool("verbose")
 	if err != nil {
-		log.Fatalf("2Error parsing CLI flags (verbose): %s", err)
+		log.Fatalf("Error parsing CLI flags (verbose): %s", err)
 	}
 
 	diffPlan, err := cmd.Flags().GetBool("diff")
 	if err != nil {
-		log.Fatalf("3Error parsing CLI flags (diff): %s", err)
+		log.Fatalf("Error parsing CLI flags (diff): %s", err)
 	}
 
 	// Populate the template into job files 💪
 	bts, err := templating.BuildHCL(&b, values)
 	if err != nil {
-		log.Fatalf("4Error building the HCL files: %s", err)
+		log.Fatalf("Error building the HCL files: %s", err)
 	}
 
 	// Prepare a table for the output in a buffer. This is done so that we can
 	// have a table after outputting the Plans for each job
 	rt, wt, err := os.Pipe()
 	if err != nil {
-		log.Fatal("5Error preparing the output table:", err)
+		log.Fatal("Error preparing the output table:", err)
 	}
 
 	defer rt.Close()
 	w := tabwriter.NewWriter(wt, 3, 0, 4, ' ', 0)
-	fmt.Fprintf(w, "6Recap of Job Plans in \"%s\" backpack:\n", b.Name)
+	fmt.Fprintf(w, "Recap of Job Plans in \"%s\" backpack:\n", b.Name)
 	if !diffPlan {
-		fmt.Fprintln(w, "7File Name\tCheck Index\tDry Run status\tPlan warnings")
+		fmt.Fprintln(w, "File Name\tCheck Index\tDry Run status\tPlan warnings")
 	} else {
-		fmt.Fprintln(w, "8File Name\tCheck Index\tDiff type\tDry run status\tWarnings")
+		fmt.Fprintln(w, "File Name\tCheck Index\tDiff type\tDry run status\tWarnings")
 	}
 	// For each job file perform the plan! 🚀
 	//only one job now
 	for name, hcl := range bts {
 		job, err := client.GetJobFromCode(string(hcl))
 		if err != nil {
-			log.Fatalf("10Error obtaining job %s: %s", name, err)
+			log.Fatalf("Error obtaining job %s: %s", name, err)
 		}
 
 		v, err := client.Validate(job)
 		if err != nil {
-			log.Fatalf("11validate Error running %s: %s", name, err)
+			log.Fatalf("validate Error running %s: %s", name, err)
 		}
-		log.Printf("111validate Error running %s: %s", name, v.Error)
-		log.Printf("111validate Error running %s: %s", name, v.Warnings)
+		log.Printf("validate Error running %s: %s", name, v.Error)
+		log.Printf("validate Error running %s: %s", name, v.Warnings)
 
 		// always show the diff for plan
 		p, err := client.Plan(job, diffPlan)
 		if err != nil {
-			log.Fatalf("12Error running %s: %s", name, err)
+			log.Fatalf("Error running %s: %s", name, err)
 		}
 
 		// Makes it clear that there are no Warnings
@@ -110,7 +110,7 @@ func planRun(cmd *cobra.Command, args []string) {
 		// are allocated properly on the nodes or not
 		dryRunStatus := "Success"
 		if len(p.FailedTGAllocs) != 0 {
-			dryRunStatus = fmt.Sprintf("%d allocations failed13", len(p.FailedTGAllocs))
+			dryRunStatus = fmt.Sprintf("%d allocations failed", len(p.FailedTGAllocs))
 		}
 
 		// If we disabled diff just populate the table and skip
@@ -123,7 +123,7 @@ func planRun(cmd *cobra.Command, args []string) {
 		fmt.Fprintf(w, "%s\t%d\t%s\t%s\t%s\t\n", name, p.JobModifyIndex, p.Diff.Type, dryRunStatus, p.Warnings)
 
 		// Write in the output the diff from the previous output
-		fmt.Printf("14Plan for job %s\n", name)
+		fmt.Printf("Plan for job %s\n", name)
 		fmt.Printf("%s Job: \"%s\"\n", getDiffSimbol(p.Diff.Type), *job.ID)
 		for _, field := range p.Diff.Fields {
 			printFieldsDiff(field, verbosePlan, 1)
@@ -141,7 +141,7 @@ func planRun(cmd *cobra.Command, args []string) {
 			// Build indentation level
 			indStr := strings.Repeat(indentationStyle, 1)
 
-			fmt.Printf("%s%s 15Task Group: \"%s\"\n", indStr, getDiffSimbol(tg.Type), tg.Name)
+			fmt.Printf("%s%s Task Group: \"%s\"\n", indStr, getDiffSimbol(tg.Type), tg.Name)
 
 			for _, field := range tg.Fields {
 				printFieldsDiff(field, verbosePlan, 2)
@@ -156,7 +156,7 @@ func planRun(cmd *cobra.Command, args []string) {
 				indStr := strings.Repeat(indentationStyle, 2)
 
 				ann := strings.Join(task.Annotations, ", ")
-				fmt.Printf("%s%s 16Task: \"%s\" (%s)\n", indStr, getDiffSimbol(task.Type), task.Name, ann)
+				fmt.Printf("%s%s Task: \"%s\" (%s)\n", indStr, getDiffSimbol(task.Type), task.Name, ann)
 
 				for _, field := range task.Fields {
 					printFieldsDiff(field, verbosePlan, 3)
@@ -175,7 +175,7 @@ func planRun(cmd *cobra.Command, args []string) {
 	wt.Close()
 	output, err := ioutil.ReadAll(rt)
 	if err != nil {
-		log.Fatal("17Error reading the output table after operation completed:", err)
+		log.Fatal("Error reading the output table after operation completed:", err)
 	}
 	os.Stdout.Write(output)
 }
