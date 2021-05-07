@@ -1,6 +1,3 @@
-# For ACL-enabled Consul Clusters, you need to specify a Consul ACL token down
-# in the `prometheus` task's scrape config.
-
 job "prometheus" {
   datacenters = ["dc1"]
   type = "service"
@@ -63,7 +60,6 @@ job "prometheus" {
         destination="local/provisioning/dashboards/file_provider.yml"
         data = <<EOH
 apiVersion: 1
-
 providers:
 - name: 'default'
   orgId: 1
@@ -81,7 +77,6 @@ EOH
         destination="local/provisioning/datasources/prometheus_datasource.yml"
         data = <<EOH
 apiVersion: 1
-
 datasources:
   - name: Prometheus
     type: prometheus
@@ -90,7 +85,7 @@ datasources:
 EOH
       }
       env {
-        GF_SERVER_ROOT_URL = "http://127.0.0.1:9999/grafana/"
+        GF_SERVER_ROOT_URL    = "http://${NOMAD_ADDR_grafana_ui}"
         GF_PATHS_PROVISIONING ="/${NOMAD_TASK_DIR}/provisioning"
       }
       driver = "docker"
@@ -101,44 +96,22 @@ EOH
     }
 
     task "prometheus" {
-//       template  {
-//         change_mode = "noop"
-//         destination="local/prometheus.yml"
-//         data = <<EOH
-// ---
-// global:
-//   scrape_interval:     15s
-// scrape_configs:
-//   - job_name: 'prometheus'
-//     scrape_interval: 5s
-//     static_configs:
-//       - targets: ['localhost:9090']
-
-//   - job_name: 'nomad'
-//     scrape_interval: 10s
-//     metrics_path: /v1/metrics
-//     params:
-//         format: ['prometheus']
-//     consul_sd_configs:
-//       - server: '{{ env "NOMAD_IP_prometheus_ui" }}:8500'
-// #        token: "c62d8564-c0c5-8dfe-3e75-005debbd0e40"
-//         services:
-//           - "nomad"
-//           - "nomad-client"
-//     relabel_configs:
-//       - source_labels: ['__meta_consul_tags']
-//         regex: .*,http,.*
-//         action: keep
-// EOH
-
-//       }
+       template  {
+         change_mode = "noop"
+         destination ="local/prometheus.yml"
+         data        = <<EOH
+---
+global:
+  scrape_interval: 15s
+EOH
+    }
 
       driver = "docker"
       config {
         image = "prom/prometheus:v2.9.1"
         args = [
-          "--web.external-url=http://127.0.0.1:9999/prometheus",
-          "--web.route-prefix=/",
+          "--web.external-url=http://${NOMAD_ADDR_prometheus_ui}/prometheus",
+          "--config.file=${NOMAD_TASK_DIR}/prometheus.yml",
         ]
         ports = ["prometheus_ui"]
       }
