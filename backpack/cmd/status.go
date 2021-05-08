@@ -73,32 +73,6 @@ func statusRun(cmd *cobra.Command, args []string) {
 	w := tabwriter.NewWriter(wt, 3, 0, 4, ' ', 0)
 	fmt.Fprintf(w, "Status of the jobs' allocations from \"%s\" backpack:\n", b.Name)
 	fmt.Fprintln(w, "Job ID\tAlloc ID\tStatus/Desired\tModified At\tError")
-	//lin
-	//fmt.Fprintf(w, "Status of the jobs' allocations from \"%s\" backpack:\n", b.Name)
-	
-	func main() {
-	    file, err := os.Open("file.txt")
-	    if err != nil {
-		log.Fatal(err)
-	    }
-	    defer func() {
-		if err = file.Close(); err != nil {
-		    log.Fatal(err)
-		}
-	    }()
-
-
-	  b, err := ioutil.ReadAll(file)
-	  fmt.Print(b)
-	}
-	
-	
-	
-	
-	
-	
-	
-	
 
 	for name, hcl := range bts {
 		job, err := client.GetJobFromCode(string(hcl))
@@ -138,4 +112,35 @@ func statusRun(cmd *cobra.Command, args []string) {
 		log.Fatal("Error reading the output table after operation completed:", err)
 	}
 	os.Stdout.Write(output)
+	
+	content, err := ioutil.ReadFile("NOTES.txt")
+
+         if err != nil {
+	      log.Fatal(err)
+         }
+
+        fmt.Println(string(content))
+}
+
+
+func main() {
+	file, err := os.Open("NOTES.txt")
+ 
+	if err != nil {
+		log.Fatalf("failed opening file: %s", err)
+	}
+ 
+	scanner := bufio.NewScanner(file)
+	scanner.Split(bufio.ScanLines)
+	var txtlines []string
+ 
+	for scanner.Scan() {
+		txtlines = append(txtlines, scanner.Text())
+	}
+ 
+	file.Close()
+ 
+	for _, eachline := range txtlines {
+		fmt.Println(eachline)
+	}
 }
