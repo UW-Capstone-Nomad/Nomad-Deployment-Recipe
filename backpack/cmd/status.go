@@ -118,7 +118,6 @@ func statusRun(cmd *cobra.Command, args []string) {
          if err != nil {
 	      log.Fatal(err)
          }
-
         fmt.Println(string(content))
 }
 
