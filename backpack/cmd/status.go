@@ -112,4 +112,12 @@ func statusRun(cmd *cobra.Command, args []string) {
 		log.Fatal("Error reading the output table after operation completed:", err)
 	}
 	os.Stdout.Write(output)
+
+	content, err := ioutil.ReadFile("NOTES.txt")
+
+         if err != nil {
+	      log.Fatal(err)
+         }
+
+        fmt.Println(string(content))
 }
