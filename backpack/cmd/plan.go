@@ -81,11 +81,19 @@ func planRun(cmd *cobra.Command, args []string) {
 		fmt.Fprintln(w, "File Name\tCheck Index\tDiff type\tDry run status\tWarnings")
 	}
 	// For each job file perform the plan! 🚀
+	//only one job now
 	for name, hcl := range bts {
 		job, err := client.GetJobFromCode(string(hcl))
 		if err != nil {
 			log.Fatalf("Error obtaining job %s: %s", name, err)
 		}
+
+		v, err := client.Validate(job)
+		if err != nil {
+			log.Fatalf("validate Error running %s: %s", name, err)
+		}
+		log.Printf("validate Error running %s: %s", name, v.Error)
+		log.Printf("validate Error running %s: %s", name, v.Warnings)
 
 		// always show the diff for plan
 		p, err := client.Plan(job, diffPlan)
