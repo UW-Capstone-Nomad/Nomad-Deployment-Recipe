@@ -120,5 +120,6 @@ func statusRun(cmd *cobra.Command, args []string) {
          }
 
         fmt.Println(string(content))
+
 }
 
