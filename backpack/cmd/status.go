@@ -25,6 +25,7 @@ var statusCmd = &cobra.Command{
 check and provide useful information. By default it shows the allocations that
 are running, or the first allocation available. If you want to see all the
 previous allocation you can use the option --all (or -a).
+
 `,
 	Run: statusRun,
 }
