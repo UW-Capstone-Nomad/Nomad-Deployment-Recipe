@@ -113,11 +113,4 @@ func statusRun(cmd *cobra.Command, args []string) {
 	}
 	os.Stdout.Write(output)
 
-	content, err := ioutil.ReadFile("NOTES.txt")
-
-         if err != nil {
-	      log.Fatal(err)
-         }
-
-        fmt.Println(string(content))
 }

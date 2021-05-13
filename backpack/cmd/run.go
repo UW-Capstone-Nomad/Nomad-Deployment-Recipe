@@ -2,8 +2,10 @@ package cmd
 
 import (
 	"fmt"
+	"io/ioutil"
 	"log"
 	"os"
+	"path/filepath"
 	"text/tabwriter"
 
 	"github.com/spf13/cobra"
@@ -58,6 +60,16 @@ func runRun(cmd *cobra.Command, args []string) {
 		}
 		return
 	}
+
+	// add README to the task
+	path := filepath.Join(filepath.Dir(args[0]), "NOTES.txt")
+	content, err := ioutil.ReadFile(path)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println(string(content))
 
 	// For each job file run it! 🚀
 	// then store the job ID in the backpack to show it afterwards.

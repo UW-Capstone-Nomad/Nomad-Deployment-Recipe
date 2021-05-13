@@ -90,10 +90,9 @@ func planRun(cmd *cobra.Command, args []string) {
 
 		v, err := client.Validate(job)
 		if err != nil {
-			log.Fatalf("validate Error running %s: %s", name, err)
+			log.Fatalf("validate Error running %s: %s, %s, %s", name, err, v.Error, v.Warnings)
 		}
-		log.Printf("validate Error running %s: %s", name, v.Error)
-		log.Printf("validate Error running %s: %s", name, v.Warnings)
+		log.Printf("Job validation successful")
 
 		// always show the diff for plan
 		p, err := client.Plan(job, diffPlan)
