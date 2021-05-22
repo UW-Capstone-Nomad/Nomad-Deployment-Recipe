@@ -49,21 +49,21 @@ defaults
    mode http
 
 frontend stats
-   bind *:{{ env "NOMAD_PORT_haproxy_ui" }}
+   bind *:{[ env "NOMAD_PORT_haproxy_ui" }]
    stats uri /
    stats show-legends
    no log
 
 frontend http_front
-   bind *:{{ env "NOMAD_PORT_webapp" }}
+   bind *:{[ env "NOMAD_PORT_webapp" }]
    default_backend http_back
 
 frontend prometheus_ui_front
-   bind *:{{ env "NOMAD_PORT_prometheus_ui" }}
+   bind *:{[ env "NOMAD_PORT_prometheus_ui" }]
    default_backend prometheus_ui_back
 
 frontend grafana_ui_front
-   bind *:{{ env "NOMAD_PORT_grafana_ui" }}
+   bind *:{[ env "NOMAD_PORT_grafana_ui" }]
    default_backend grafana_ui_back
 
 backend http_back
@@ -79,11 +79,12 @@ backend grafana_ui_back
     server-template grafana 5 _grafana._tcp.service.consul resolvers consul resolve-opts allow-dup-ip resolve-prefer ipv4 check
 
 resolvers consul
-  nameserver consul {{ env "attr.unique.network.ip-address" }}:8600
+  nameserver consul {[ env "attr.unique.network.ip-address" }]:8600
   accepted_payload_size 8192
   hold valid 5s
 EOF
-
+        left_delimiter = "{[" 
+        right_delimiter = "}]" 
         destination   = "local/haproxy.cfg"
         change_mode   = "signal"
         change_signal = "SIGUSR1"

@@ -46,7 +46,7 @@ job "autoscaler" {
       template {
         data = <<EOF
 nomad {
-  address = "http://{{env "attr.unique.network.ip-address" }}:4646"
+  address = "http://{[env "attr.unique.network.ip-address" }]:4646"
 }
 
 telemetry {
@@ -57,7 +57,7 @@ telemetry {
 apm "prometheus" {
   driver = "prometheus"
   config = {
-    address = "http://{{ env "attr.unique.network.ip-address" }}:9090"
+    address = "http://{[ env "attr.unique.network.ip-address" }]:9090"
   }
 }
 
@@ -108,14 +108,14 @@ strategy "target-value" {
       template {
         data = <<EOH
 server:
-  http_listen_port: {{ env "NOMAD_PORT_promtail" }}
+  http_listen_port: {[ env "NOMAD_PORT_promtail" }]
   grpc_listen_port: 0
 
 positions:
   filename: /tmp/positions.yaml
 
 client:
-  url: http://{{ range $i, $s := service "loki" }}{{ if eq $i 0 }}{{.Address}}:{{.Port}}{{end}}{{end}}/api/prom/push
+  url: http://{[ range $i, $s := service "loki" }]{[ if eq $i 0 }]{[.Address}]:{[.Port}]{[end}]{[end}]/api/prom/push
 
 scrape_configs:
 - job_name: system
@@ -141,7 +141,8 @@ scrape_configs:
           job:
           namespace:
 EOH
-
+        left_delimiter = "{[" 
+        right_delimiter = "}]" 
         destination = "local/promtail.yaml"
       }
 
