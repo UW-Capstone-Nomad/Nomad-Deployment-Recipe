@@ -1,0 +1,34 @@
+#################
+
+NOTES:
+** Please be patient while the nomad file is being deployed **
+
+
+To access your minio site follow the steps below:
+
+1. Get the Allocations ID by running the commands:
+
+  nomad status minio
+
+  For example the Allocations ID below is 7185467d:
+    Allocations
+    ID        Node ID   Task Group  Version  Desired  Status   Created  Modified
+    7185467d  9b6d0743  storage     0        run      running  47s ago  33s ago
+
+2. Get the Allocation Addresses by running the commands:
+  nomad status {Allocations ID}
+
+  For example:
+    nomad status 7185467d
+  Then we can find:
+    Allocation Addresses
+    Label  Dynamic  Address
+    *api   yes      10.0.0.202:9000 -> 9000
+
+
+2. Open a browser and access minio using the obtained addewss.
+
+    For example:
+    10.0.0.202:9000
+
+3. Login with the following credentials below to see your blog:
