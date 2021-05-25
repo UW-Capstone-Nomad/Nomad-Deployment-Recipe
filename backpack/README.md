@@ -21,6 +21,12 @@ If you need some help or you want to stay updated with the latest news,
 
 Backpack is currently tested against Nomad version 0.12.8
 
+
+
+
+
+
+
 # Get Start Guide
 
 ## Download & Install
@@ -42,12 +48,10 @@ cd /build
 
 ## How to use
 
-### Deploying cluster of nomad agents (3 servers 2 clients)
-https://github.com/hashicorp/nomad/tree/main/dev/cluster
-- into root first: sudo -s
-- source cluster.sh (this should raise a cluster of nomad agents)
-- have the following configuration in client.hcl (to deploy wordpress.nomad):
-```java
+1. Add the host_volume information to the client stanza in the Nomad configuration
+   - create config file: sudo touch /etc/nomad.d/client.hcl
+   - edit client.hcl
+```
 client {
   enabled = true
   host_volume "my-website-db" {
@@ -55,52 +59,46 @@ client {
     read_only = false
   }
 }
+
 ```
 
-**Create** your first pack, by using the boilerplate directory structure:
+2. Create a folder on one of the Nomad clients to host the registry files
+```
+sudo mkdir /opt/volumes/my-db
+```
+
+3. Start nomad agent with -config to load config file (start agent)
+```
+sudo nomad agent -config=/etc/nomad.d/client.hcl -dev -bind 0.0.0.0 -log-level INFO
+```
+
+4. Deploy the application
+
+In this part, users will fellow the guide of [backpack](https://gitlab.com/koalalorenzo/backpack/-/blob/master/README.md). It mainly include create, plan and run.
+Here, take minio as an example.
+
+- Create your first pack, by using the boilerplate directory structure:
 
 ```shell
-./backpack create nginx
+./backpack create minio
 ```
 
-**Pack** all the files into one single pack:
+- Plan and validate (dry-run) the jobs of a package before running:
 ```shell
-./backpack pack ./nginx-0.1.0/
+./backpack plan ./nginx-0.1.0.backpack
 ```
 
-**Customize** the values for the template to configure, enable, adjust the jobs:
+- Run your Nomad Jobs with my custom values:
 ```shell
-./backpack unpack values ./nginx-0.1.0.backpack -f ./values.yaml
-```
-
-**Plan** and validate (dry-run) the jobs of a package before running:
-```shell
-./backpack plan ./nginx-0.1.0.backpack -v ./values.yaml
-```
-
-**Run** your Nomad Jobs with my custom values:
-```shell
-./backpack run ./nginx-0.1.0.backpack -v ./values.yaml
-```
-
-**Check** the status of the job allocations:
-```shell
-./backpack status ./nginx-0.1.0.backpack --all
-```
-
-Unpack, customize or Run a backpack **from an URL**:
-```shell
-./backpack unpack values https://backpack.qm64.tech/examples/redis-6.0.0.backpack -f ./values.yaml
-./backpack run https://backpack.qm64.tech/examples/redis-6.0.0.backpack -v values.yaml
-```
-
-**Get Help** and learn more for each command
-```shell
-./backpack help
+./backpack run ./nginx-0.1.0.backpack
 ```
 
 
-Happy Backpacking! 🎒😀 
+
+
+
+
+
 
 ## Read More
 
