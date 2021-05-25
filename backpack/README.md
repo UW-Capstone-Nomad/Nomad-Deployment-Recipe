@@ -39,10 +39,6 @@ cd Nomad-Deployment-Recipe/backpack
 sudo apt-get install make
 make build
 cd /build
-./backpack create nginx
-./backpack pack ./nginx-0.1.0/
-./backpack unpack values ./nginx-0.1.0.backpack -f ./values.yaml
-./backpack plan ./nginx-0.1.0.backpack -v ./values.yaml
 
 ```
 
@@ -54,8 +50,8 @@ cd /build
 ```
 client {
   enabled = true
-  host_volume "my-website-db" {
-    path = "/opt/volumes/my-website-db"
+  host_volume "my-db" {
+    path = "/opt/volumes/my-db"
     read_only = false
   }
 }
@@ -76,6 +72,17 @@ sudo nomad agent -config=/etc/nomad.d/client.hcl -dev -bind 0.0.0.0 -log-level I
 
 In this part, users will fellow the guide of [backpack](https://gitlab.com/koalalorenzo/backpack/-/blob/master/README.md). It mainly include create, plan and run.
 Here, take minio as an example.
+
+Backpack can be built from source by firstly cloning the repository git clone https://github.com/UW-Capstone-Nomad/Nomad-Deployment-Recipe.git. Once cloned, a binary can be built using the make build command which will be available at ./bin/backpack.
+
+```shell
+git clone https://github.com/UW-Capstone-Nomad/Nomad-Deployment-Recipe.git
+cd Nomad-Deployment-Recipe/backpack
+sudo apt-get install make
+make build
+cd /build
+```
+
 
 - Create your first pack, by using the boilerplate directory structure:
 
