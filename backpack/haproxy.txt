@@ -1,0 +1,24 @@
+[NOTICE] 132/103227 (1) : haproxy version is 2.3.5-5902ad9
+[NOTICE] 132/103227 (1) : path to executable is /usr/local/sbin/haproxy
+[ALERT] 132/103227 (1) : parsing [/usr/local/etc/haproxy/haproxy.cfg:8] : 'bind' : missing port specification in '*:'
+[ALERT] 132/103227 (1) : parsing [/usr/local/etc/haproxy/haproxy.cfg:14] : 'bind' : missing port specification in '*:'
+[ALERT] 132/103227 (1) : parsing [/usr/local/etc/haproxy/haproxy.cfg:18] : 'bind' : missing port specification in '*:'
+[ALERT] 132/103227 (1) : parsing [/usr/local/etc/haproxy/haproxy.cfg:22] : 'bind' : missing port specification in '*:'
+[ALERT] 132/103227 (1) : Error(s) found in configuration file : /usr/local/etc/haproxy/haproxy.cfg
+[ALERT] 132/103227 (1) : Fatal errors found in configuration.
+[NOTICE] 132/103244 (1) : haproxy version is 2.3.5-5902ad9
+[NOTICE] 132/103244 (1) : path to executable is /usr/local/sbin/haproxy
+[ALERT] 132/103244 (1) : parsing [/usr/local/etc/haproxy/haproxy.cfg:8] : 'bind' : missing port specification in '*:'
+[ALERT] 132/103244 (1) : parsing [/usr/local/etc/haproxy/haproxy.cfg:14] : 'bind' : missing port specification in '*:'
+[ALERT] 132/103244 (1) : parsing [/usr/local/etc/haproxy/haproxy.cfg:18] : 'bind' : missing port specification in '*:'
+[ALERT] 132/103244 (1) : parsing [/usr/local/etc/haproxy/haproxy.cfg:22] : 'bind' : missing port specification in '*:'
+[ALERT] 132/103244 (1) : Error(s) found in configuration file : /usr/local/etc/haproxy/haproxy.cfg
+[ALERT] 132/103244 (1) : Fatal errors found in configuration.
+[NOTICE] 132/103302 (1) : haproxy version is 2.3.5-5902ad9
+[NOTICE] 132/103302 (1) : path to executable is /usr/local/sbin/haproxy
+[ALERT] 132/103302 (1) : parsing [/usr/local/etc/haproxy/haproxy.cfg:8] : 'bind' : missing port specification in '*:'
+[ALERT] 132/103302 (1) : parsing [/usr/local/etc/haproxy/haproxy.cfg:14] : 'bind' : missing port specification in '*:'
+[ALERT] 132/103302 (1) : parsing [/usr/local/etc/haproxy/haproxy.cfg:18] : 'bind' : missing port specification in '*:'
+[ALERT] 132/103302 (1) : parsing [/usr/local/etc/haproxy/haproxy.cfg:22] : 'bind' : missing port specification in '*:'
+[ALERT] 132/103302 (1) : Error(s) found in configuration file : /usr/local/etc/haproxy/haproxy.cfg
+[ALERT] 132/103302 (1) : Fatal errors found in configuration.

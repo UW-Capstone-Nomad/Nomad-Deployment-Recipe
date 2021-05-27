@@ -40,13 +40,12 @@ datasources:
 - name: Prometheus
   type: prometheus
   access: proxy
-  url: http://{[ range $i, $s := service "prometheus" }]{[ if eq $i 0 }]{[.Address}]:{[.Port}]{[end}]{[end}]
+  url: http://{{ range $i, $s := service "prometheus" }}{{ if eq $i 0 }}{{.Address}}:{{.Port}}{{end}}{{end}}
   isDefault: true
   version: 1
   editable: false
 EOH
-        left_delimiter = "{[" 
-        right_delimiter = "}]"
+
         destination = "local/datasources/prometheus.yaml"
       }
 
@@ -57,13 +56,12 @@ datasources:
 - name: Loki
   type: loki
   access: proxy
-  url: http://{[ range $i, $s := service "loki" }]{[ if eq $i 0 }]{[.Address}]:{[.Port}]{[end}]{[end}]
+  url: http://{{ range $i, $s := service "loki" }}{{ if eq $i 0 }}{{.Address}}:{{.Port}}{{end}}{{end}}
   isDefault: false
   version: 1
   editable: false
 EOH
-        left_delimiter = "{[" 
-        right_delimiter = "}]"
+
         destination = "local/datasources/loki.yaml"
       }
 

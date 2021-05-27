@@ -1,8 +1,7 @@
 client {
   enabled = true
-  host_volume "my-website-db" {
-    path = "/opt/volumes/my-website-db"
+  host_volume "minio-data" {
+    path = "/opt/volumes/minio-data"
     read_only = false
   }
 }
-

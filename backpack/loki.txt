@@ -1,0 +1,150 @@
+2021-05-13 10:26:47.930034 I | proto: duplicate proto type registered: ingester.Series
+level=info ts=2021-05-13T10:26:47.935282716Z caller=main.go:130 msg="Starting Loki" version="(version=2.1.0, branch=HEAD, revision=1b79df375)"
+level=info ts=2021-05-13T10:26:47.935407849Z caller=modules.go:431 msg="RulerStorage is not configured in single binary mode and will not be started."
+level=info ts=2021-05-13T10:26:47.936190736Z caller=server.go:225 http=[::]:35945 grpc=[::]:9095 msg="server listening on addresses"
+level=info ts=2021-05-13T10:26:47.938137871Z caller=modules.go:456 msg="RulerStorage is nil.  Not starting the ruler."
+level=info ts=2021-05-13T10:26:47.9382777Z caller=worker.go:65 msg="no address specified, not starting worker"
+level=info ts=2021-05-13T10:26:47.940182924Z caller=module_service.go:58 msg=initialising module=store
+level=info ts=2021-05-13T10:26:47.940706999Z caller=module_service.go:58 msg=initialising module=memberlist-kv
+level=info ts=2021-05-13T10:26:47.94083062Z caller=module_service.go:58 msg=initialising module=server
+level=info ts=2021-05-13T10:26:47.94167386Z caller=module_service.go:58 msg=initialising module=ring
+level=info ts=2021-05-13T10:26:47.941866439Z caller=module_service.go:58 msg=initialising module=table-manager
+level=info ts=2021-05-13T10:26:47.941891361Z caller=module_service.go:58 msg=initialising module=ingester
+level=info ts=2021-05-13T10:26:47.942479566Z caller=client.go:242 msg="value is nil" key=collectors/ring index=1
+level=info ts=2021-05-13T10:26:47.942580779Z caller=module_service.go:58 msg=initialising module=distributor
+level=info ts=2021-05-13T10:26:47.942591116Z caller=module_service.go:58 msg=initialising module=ingester-querier
+level=info ts=2021-05-13T10:26:47.942715599Z caller=table_manager.go:324 msg="synching tables" expected_tables=53
+level=info ts=2021-05-13T10:26:47.942866617Z caller=table_manager.go:476 msg="creating table" table=index_2634
+level=info ts=2021-05-13T10:26:47.942947044Z caller=table_manager.go:476 msg="creating table" table=index_2643
+level=info ts=2021-05-13T10:26:47.942992011Z caller=table_manager.go:476 msg="creating table" table=index_2672
+level=info ts=2021-05-13T10:26:47.943070575Z caller=table_manager.go:476 msg="creating table" table=index_2632
+level=info ts=2021-05-13T10:26:47.943114951Z caller=table_manager.go:476 msg="creating table" table=index_2642
+level=info ts=2021-05-13T10:26:47.943157764Z caller=table_manager.go:476 msg="creating table" table=index_2658
+level=info ts=2021-05-13T10:26:47.943203151Z caller=table_manager.go:476 msg="creating table" table=index_2675
+level=info ts=2021-05-13T10:26:47.943246525Z caller=table_manager.go:476 msg="creating table" table=index_2638
+level=info ts=2021-05-13T10:26:47.94329579Z caller=table_manager.go:476 msg="creating table" table=index_2637
+level=info ts=2021-05-13T10:26:47.943337811Z caller=table_manager.go:476 msg="creating table" table=index_2647
+level=info ts=2021-05-13T10:26:47.94337822Z caller=table_manager.go:476 msg="creating table" table=index_2651
+level=info ts=2021-05-13T10:26:47.943421785Z caller=table_manager.go:476 msg="creating table" table=index_2652
+level=info ts=2021-05-13T10:26:47.943464498Z caller=table_manager.go:476 msg="creating table" table=index_2662
+level=info ts=2021-05-13T10:26:47.943505077Z caller=table_manager.go:476 msg="creating table" table=index_2631
+level=info ts=2021-05-13T10:26:47.943548261Z caller=table_manager.go:476 msg="creating table" table=index_2656
+level=info ts=2021-05-13T10:26:47.943621576Z caller=table_manager.go:476 msg="creating table" table=index_2660
+level=info ts=2021-05-13T10:26:47.943728609Z caller=table_manager.go:476 msg="creating table" table=index_2678
+level=info ts=2021-05-13T10:26:47.943834289Z caller=table_manager.go:476 msg="creating table" table=index_2679
+level=info ts=2021-05-13T10:26:47.943891046Z caller=table_manager.go:476 msg="creating table" table=index_2640
+level=info ts=2021-05-13T10:26:47.943960935Z caller=table_manager.go:476 msg="creating table" table=index_2645
+level=info ts=2021-05-13T10:26:47.944007124Z caller=table_manager.go:476 msg="creating table" table=index_2670
+level=info ts=2021-05-13T10:26:47.943636461Z caller=lifecycler.go:518 msg="not loading tokens from file, tokens file path is empty"
+level=info ts=2021-05-13T10:26:47.944106524Z caller=table_manager.go:476 msg="creating table" table=index_2654
+level=info ts=2021-05-13T10:26:47.943646118Z caller=loki.go:227 msg="Loki started"
+level=info ts=2021-05-13T10:26:47.94416867Z caller=table_manager.go:476 msg="creating table" table=index_2673
+level=info ts=2021-05-13T10:26:47.944242256Z caller=table_manager.go:476 msg="creating table" table=index_2633
+level=info ts=2021-05-13T10:26:47.944226809Z caller=lifecycler.go:547 msg="instance not found in ring, adding with no tokens" ring=ingester
+level=info ts=2021-05-13T10:26:47.944310622Z caller=table_manager.go:476 msg="creating table" table=index_2649
+level=info ts=2021-05-13T10:26:47.944387995Z caller=table_manager.go:476 msg="creating table" table=index_2653
+level=info ts=2021-05-13T10:26:47.944485421Z caller=table_manager.go:476 msg="creating table" table=index_2667
+level=info ts=2021-05-13T10:26:47.944487765Z caller=lifecycler.go:394 msg="auto-joining cluster after timeout" ring=ingester
+level=info ts=2021-05-13T10:26:47.944550763Z caller=table_manager.go:476 msg="creating table" table=index_2641
+level=info ts=2021-05-13T10:26:47.944615764Z caller=table_manager.go:476 msg="creating table" table=index_2639
+level=info ts=2021-05-13T10:26:47.944698064Z caller=table_manager.go:476 msg="creating table" table=index_2648
+level=info ts=2021-05-13T10:26:47.94479528Z caller=table_manager.go:476 msg="creating table" table=index_2666
+level=info ts=2021-05-13T10:26:47.945165352Z caller=table_manager.go:476 msg="creating table" table=index_2674
+level=info ts=2021-05-13T10:26:47.945235582Z caller=table_manager.go:476 msg="creating table" table=index_2676
+level=info ts=2021-05-13T10:26:47.945279607Z caller=table_manager.go:476 msg="creating table" table=index_2628
+level=info ts=2021-05-13T10:26:47.94536944Z caller=table_manager.go:476 msg="creating table" table=index_2646
+level=info ts=2021-05-13T10:26:47.945417663Z caller=table_manager.go:476 msg="creating table" table=index_2635
+level=info ts=2021-05-13T10:26:47.945477245Z caller=table_manager.go:476 msg="creating table" table=index_2650
+level=info ts=2021-05-13T10:26:47.945534673Z caller=table_manager.go:476 msg="creating table" table=index_2671
+level=info ts=2021-05-13T10:26:47.94559739Z caller=table_manager.go:476 msg="creating table" table=index_2636
+level=info ts=2021-05-13T10:26:47.945653796Z caller=table_manager.go:476 msg="creating table" table=index_2665
+level=info ts=2021-05-13T10:26:47.94571457Z caller=table_manager.go:476 msg="creating table" table=index_2663
+level=info ts=2021-05-13T10:26:47.945762341Z caller=table_manager.go:476 msg="creating table" table=index_2668
+level=info ts=2021-05-13T10:26:47.945806347Z caller=table_manager.go:476 msg="creating table" table=index_2680
+level=info ts=2021-05-13T10:26:47.945863424Z caller=table_manager.go:476 msg="creating table" table=index_2664
+level=info ts=2021-05-13T10:26:47.945907549Z caller=table_manager.go:476 msg="creating table" table=index_2644
+level=info ts=2021-05-13T10:26:47.945964677Z caller=table_manager.go:476 msg="creating table" table=index_2657
+level=info ts=2021-05-13T10:26:47.946056784Z caller=table_manager.go:476 msg="creating table" table=index_2661
+level=info ts=2021-05-13T10:26:47.946169396Z caller=table_manager.go:476 msg="creating table" table=index_2669
+level=info ts=2021-05-13T10:26:47.946261223Z caller=table_manager.go:476 msg="creating table" table=index_2629
+level=info ts=2021-05-13T10:26:47.946362486Z caller=table_manager.go:476 msg="creating table" table=index_2677
+level=info ts=2021-05-13T10:26:47.946434209Z caller=table_manager.go:476 msg="creating table" table=index_2659
+level=info ts=2021-05-13T10:26:47.946484274Z caller=table_manager.go:476 msg="creating table" table=index_2655
+level=info ts=2021-05-13T10:26:47.94653432Z caller=table_manager.go:476 msg="creating table" table=index_2630
+level=info ts=2021-05-13T10:28:47.944262118Z caller=table_manager.go:324 msg="synching tables" expected_tables=53
+level=info ts=2021-05-13T10:30:47.943131388Z caller=table_manager.go:324 msg="synching tables" expected_tables=53
+level=info ts=2021-05-13T10:32:47.948491357Z caller=table_manager.go:324 msg="synching tables" expected_tables=53
+level=info ts=2021-05-13T10:34:47.946619127Z caller=table_manager.go:324 msg="synching tables" expected_tables=53
+2021-05-13 10:35:46.412241 I | proto: duplicate proto type registered: ingester.Series
+level=info ts=2021-05-13T10:35:46.425331418Z caller=main.go:130 msg="Starting Loki" version="(version=2.1.0, branch=HEAD, revision=1b79df375)"
+level=info ts=2021-05-13T10:35:46.425441888Z caller=modules.go:431 msg="RulerStorage is not configured in single binary mode and will not be started."
+level=info ts=2021-05-13T10:35:46.425976225Z caller=server.go:225 http=[::]:41011 grpc=[::]:9095 msg="server listening on addresses"
+level=info ts=2021-05-13T10:35:46.427618236Z caller=modules.go:456 msg="RulerStorage is nil.  Not starting the ruler."
+level=info ts=2021-05-13T10:35:46.427803584Z caller=worker.go:65 msg="no address specified, not starting worker"
+level=info ts=2021-05-13T10:35:46.4287674Z caller=module_service.go:58 msg=initialising module=memberlist-kv
+level=info ts=2021-05-13T10:35:46.428836619Z caller=module_service.go:58 msg=initialising module=server
+level=info ts=2021-05-13T10:35:46.428781845Z caller=module_service.go:58 msg=initialising module=store
+level=info ts=2021-05-13T10:35:46.428941559Z caller=module_service.go:58 msg=initialising module=table-manager
+level=info ts=2021-05-13T10:35:46.428983261Z caller=module_service.go:58 msg=initialising module=ingester
+level=info ts=2021-05-13T10:35:46.428971851Z caller=module_service.go:58 msg=initialising module=ring
+level=info ts=2021-05-13T10:35:46.429144187Z caller=lifecycler.go:518 msg="not loading tokens from file, tokens file path is empty"
+level=info ts=2021-05-13T10:35:46.42958836Z caller=module_service.go:58 msg=initialising module=ingester-querier
+level=info ts=2021-05-13T10:35:46.429216722Z caller=module_service.go:58 msg=initialising module=distributor
+level=info ts=2021-05-13T10:35:46.429886342Z caller=lifecycler.go:547 msg="instance not found in ring, adding with no tokens" ring=ingester
+level=info ts=2021-05-13T10:35:46.430318053Z caller=lifecycler.go:394 msg="auto-joining cluster after timeout" ring=ingester
+level=info ts=2021-05-13T10:35:46.43088094Z caller=table_manager.go:324 msg="synching tables" expected_tables=53
+level=info ts=2021-05-13T10:35:46.43111935Z caller=table_manager.go:476 msg="creating table" table=index_2643
+level=info ts=2021-05-13T10:35:46.431562841Z caller=table_manager.go:476 msg="creating table" table=index_2659
+level=info ts=2021-05-13T10:35:46.431732483Z caller=table_manager.go:476 msg="creating table" table=index_2664
+level=info ts=2021-05-13T10:35:46.431837523Z caller=table_manager.go:476 msg="creating table" table=index_2672
+level=info ts=2021-05-13T10:35:46.431945519Z caller=table_manager.go:476 msg="creating table" table=index_2670
+level=info ts=2021-05-13T10:35:46.432031326Z caller=table_manager.go:476 msg="creating table" table=index_2677
+level=info ts=2021-05-13T10:35:46.4321149Z caller=table_manager.go:476 msg="creating table" table=index_2641
+level=info ts=2021-05-13T10:35:46.432205305Z caller=table_manager.go:476 msg="creating table" table=index_2661
+level=info ts=2021-05-13T10:35:46.432286184Z caller=table_manager.go:476 msg="creating table" table=index_2666
+level=info ts=2021-05-13T10:35:46.432474347Z caller=table_manager.go:476 msg="creating table" table=index_2667
+level=info ts=2021-05-13T10:35:46.432630605Z caller=table_manager.go:476 msg="creating table" table=index_2669
+level=info ts=2021-05-13T10:35:46.432843771Z caller=table_manager.go:476 msg="creating table" table=index_2630
+level=info ts=2021-05-13T10:35:46.431353362Z caller=loki.go:227 msg="Loki started"
+level=info ts=2021-05-13T10:35:46.433253926Z caller=table_manager.go:476 msg="creating table" table=index_2645
+level=info ts=2021-05-13T10:35:46.433496022Z caller=table_manager.go:476 msg="creating table" table=index_2647
+level=info ts=2021-05-13T10:35:46.434106721Z caller=table_manager.go:476 msg="creating table" table=index_2650
+level=info ts=2021-05-13T10:35:46.434285017Z caller=table_manager.go:476 msg="creating table" table=index_2675
+level=info ts=2021-05-13T10:35:46.434424276Z caller=table_manager.go:476 msg="creating table" table=index_2657
+level=info ts=2021-05-13T10:35:46.434549241Z caller=table_manager.go:476 msg="creating table" table=index_2640
+level=info ts=2021-05-13T10:35:46.434668846Z caller=table_manager.go:476 msg="creating table" table=index_2649
+level=info ts=2021-05-13T10:35:46.434816109Z caller=table_manager.go:476 msg="creating table" table=index_2639
+level=info ts=2021-05-13T10:35:46.434935574Z caller=table_manager.go:476 msg="creating table" table=index_2644
+level=info ts=2021-05-13T10:35:46.435139204Z caller=table_manager.go:476 msg="creating table" table=index_2660
+level=info ts=2021-05-13T10:35:46.435322138Z caller=table_manager.go:476 msg="creating table" table=index_2642
+level=info ts=2021-05-13T10:35:46.435446832Z caller=table_manager.go:476 msg="creating table" table=index_2653
+level=info ts=2021-05-13T10:35:46.435649941Z caller=table_manager.go:476 msg="creating table" table=index_2658
+level=info ts=2021-05-13T10:35:46.435780125Z caller=table_manager.go:476 msg="creating table" table=index_2678
+level=info ts=2021-05-13T10:35:46.435899159Z caller=table_manager.go:476 msg="creating table" table=index_2632
+level=info ts=2021-05-13T10:35:46.436020127Z caller=table_manager.go:476 msg="creating table" table=index_2671
+level=info ts=2021-05-13T10:35:46.436148798Z caller=table_manager.go:476 msg="creating table" table=index_2629
+level=info ts=2021-05-13T10:35:46.4362664Z caller=table_manager.go:476 msg="creating table" table=index_2638
+level=info ts=2021-05-13T10:35:46.436400891Z caller=table_manager.go:476 msg="creating table" table=index_2648
+level=info ts=2021-05-13T10:35:46.436517241Z caller=table_manager.go:476 msg="creating table" table=index_2674
+level=info ts=2021-05-13T10:35:46.43665653Z caller=table_manager.go:476 msg="creating table" table=index_2679
+level=info ts=2021-05-13T10:35:46.436804264Z caller=table_manager.go:476 msg="creating table" table=index_2634
+level=info ts=2021-05-13T10:35:46.436920033Z caller=table_manager.go:476 msg="creating table" table=index_2635
+level=info ts=2021-05-13T10:35:46.437063239Z caller=table_manager.go:476 msg="creating table" table=index_2636
+level=info ts=2021-05-13T10:35:46.437181011Z caller=table_manager.go:476 msg="creating table" table=index_2654
+level=info ts=2021-05-13T10:35:46.437296109Z caller=table_manager.go:476 msg="creating table" table=index_2656
+level=info ts=2021-05-13T10:35:46.437411306Z caller=table_manager.go:476 msg="creating table" table=index_2646
+level=info ts=2021-05-13T10:35:46.437527105Z caller=table_manager.go:476 msg="creating table" table=index_2655
+level=info ts=2021-05-13T10:35:46.437656147Z caller=table_manager.go:476 msg="creating table" table=index_2673
+level=info ts=2021-05-13T10:35:46.437831198Z caller=table_manager.go:476 msg="creating table" table=index_2676
+level=info ts=2021-05-13T10:35:46.437963315Z caller=table_manager.go:476 msg="creating table" table=index_2628
+level=info ts=2021-05-13T10:35:46.438080406Z caller=table_manager.go:476 msg="creating table" table=index_2637
+level=info ts=2021-05-13T10:35:46.438224243Z caller=table_manager.go:476 msg="creating table" table=index_2651
+level=info ts=2021-05-13T10:35:46.438335965Z caller=table_manager.go:476 msg="creating table" table=index_2633
+level=info ts=2021-05-13T10:35:46.438433352Z caller=table_manager.go:476 msg="creating table" table=index_2652
+level=info ts=2021-05-13T10:35:46.438538452Z caller=table_manager.go:476 msg="creating table" table=index_2662
+level=info ts=2021-05-13T10:35:46.438635479Z caller=table_manager.go:476 msg="creating table" table=index_2668
+level=info ts=2021-05-13T10:35:46.438760143Z caller=table_manager.go:476 msg="creating table" table=index_2631
+level=info ts=2021-05-13T10:35:46.438903419Z caller=table_manager.go:476 msg="creating table" table=index_2663
+level=info ts=2021-05-13T10:35:46.439056122Z caller=table_manager.go:476 msg="creating table" table=index_2665
+level=info ts=2021-05-13T10:35:46.439195441Z caller=table_manager.go:476 msg="creating table" table=index_2680
+level=info ts=2021-05-13T10:37:46.429949717Z caller=table_manager.go:324 msg="synching tables" expected_tables=53
