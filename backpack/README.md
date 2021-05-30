@@ -21,61 +21,91 @@ If you need some help or you want to stay updated with the latest news,
 
 Backpack is currently tested against Nomad version 0.12.8
 
-## TL;DR: Install
-You can manually download the latest release from 
-[the release page here](https://gitlab.com/Qm64/backpack/-/releases).
 
-Or compile the binaries:
+
+
+
+
+
+# Get Start Guide
+
+## Download & Install
+
+
+Backpack can be built from source by firstly cloning the repository git clone https://github.com/UW-Capstone-Nomad/Nomad-Deployment-Recipe.git. Once cloned, a binary can be built using the make build command which will be available at ./bin/backpack.
 ```shell
-go get -v gitlab.com/Qm64/backpack
-cd $GOPATH/src/gitlab.com/Qm64/backpack/
-make install
+git clone https://github.com/UW-Capstone-Nomad/Nomad-Deployment-Recipe.git
+cd Nomad-Deployment-Recipe/backpack
+sudo apt-get install make
+make build
+cd /build
+
 ```
 
-## TL;DR How to Use
-**Create** your first pack, by using the boilerplate directory structure:
+## How to use
 
-```shell
-backpack create nginx
+1. Add the host_volume information to the client stanza in the Nomad configuration
+   - create config file: sudo touch /etc/nomad.d/client.hcl
+   - edit client.hcl
+```
+client {
+  enabled = true
+  host_volume "my-db" {
+    path = "/opt/volumes/my-db"
+    read_only = false
+  }
+}
+
 ```
 
-**Pack** all the files into one single pack:
-```shell
-backpack pack ./nginx-0.1.0/
+2. Create a folder on one of the Nomad clients to host the registry files
+```
+sudo mkdir /opt/volumes/my-db
 ```
 
-**Customize** the values for the template to configure, enable, adjust the jobs:
-```shell
-backpack unpack values ./nginx-0.1.0.backpack -f ./values.yaml
+3. Start nomad agent with -config to load config file (start agent)
+```
+sudo nomad agent -config=/etc/nomad.d/client.hcl -dev -bind 0.0.0.0 -log-level INFO
 ```
 
-**Plan** and validate (dry-run) the jobs of a package before running:
+4. Deploy the application
+
+In this part, users will fellow the guide of [backpack](https://gitlab.com/koalalorenzo/backpack/-/blob/master/README.md). It mainly include create, plan and run.
+Here, take minio as an example.
+
+Backpack can be built from source by firstly cloning the repository git clone https://github.com/UW-Capstone-Nomad/Nomad-Deployment-Recipe.git. Once cloned, a binary can be built using the make build command which will be available at ./bin/backpack.
+
 ```shell
-backpack plan ./nginx-0.1.0.backpack -v ./values.yaml
+git clone https://github.com/UW-Capstone-Nomad/Nomad-Deployment-Recipe.git
+cd Nomad-Deployment-Recipe/backpack
+sudo apt-get install make
+make build
+cd /build
 ```
 
-**Run** your Nomad Jobs with my custom values:
+
+- Create your first pack, by using the boilerplate directory structure:
+
 ```shell
-backpack run ./nginx-0.1.0.backpack -v ./values.yaml
+./backpack create minio
 ```
 
-**Check** the status of the job allocations:
+- Plan and validate (dry-run) the jobs of a package before running:
 ```shell
-backpack status ./nginx-0.1.0.backpack --all
+./backpack plan ./nginx-0.1.0.backpack
 ```
 
-Unpack, customize or Run a backpack **from an URL**:
+- Run your Nomad Jobs with my custom values:
 ```shell
-backpack unpack values https://backpack.qm64.tech/examples/redis-6.0.0.backpack -f ./values.yaml
-backpack run https://backpack.qm64.tech/examples/redis-6.0.0.backpack -v values.yaml
+./backpack run ./nginx-0.1.0.backpack
 ```
 
-**Get Help** and learn more for each command
-```shell
-backpack help
-```
 
-Happy Backpacking! 🎒😀 
+
+
+
+
+
 
 ## Read More
 
