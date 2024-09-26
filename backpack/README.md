@@ -1,3 +1,4 @@
+
 # Nomad's Backpack 🎒
 
 [Backpack](https://backpack.qm64.tech) 🎒 is a packaging system for
@@ -19,7 +20,15 @@ check [the blog post on Qm64 website](https://qm64.tech/posts/202011-hashicorp-n
 If you need some help or you want to stay updated with the latest news,
 [join Qm64's chatroom on Matrix](https://matrix.to/#/#qm64:matrix.org?via=matrix.org)
 
-Backpack is currently tested against Nomad version 0.12.8
+Backpack is currently tested against Nomad version 1.1.0
+
+This version of Backpack is baesd on the work of [Lorenzo Setale](https://blog.setale.me/) 
+but get modified by a team of the University of Washington to make the Backpack closer to [Helm](https://helm.sh/).
+There are new features such as:
+* Exporting deployed job port
+* Offering well-documented example applications
+* Easier to maintain and integrate with other software long-term
+
 
 ## TL;DR: Install
 You can manually download the latest release from 
@@ -33,6 +42,8 @@ make install
 ```
 
 ## TL;DR How to Use
+First, start the nomad agent following the [tutorials](https://learn.hashicorp.com/tutorials/nomad/get-started-run?in=nomad/get-started) or the README files in the test applications folders.
+
 **Create** your first pack, by using the boilerplate directory structure:
 
 ```shell
@@ -54,7 +65,7 @@ backpack unpack values ./nginx-0.1.0.backpack -f ./values.yaml
 backpack plan ./nginx-0.1.0.backpack -v ./values.yaml
 ```
 
-**Run** your Nomad Jobs with my custom values:
+**Run** your Nomad Jobs with my custom values and export deployed job port:
 ```shell
 backpack run ./nginx-0.1.0.backpack -v ./values.yaml
 ```

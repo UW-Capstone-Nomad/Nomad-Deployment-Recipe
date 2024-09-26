@@ -103,6 +103,7 @@ func statusRun(cmd *cobra.Command, args []string) {
 			fmt.Fprintf(w, "%s\t%s\t%s/%s\t%s\t\n", *jobResult.ID, allocID, alloc.ClientStatus, alloc.DesiredStatus, lt)
 		}
 
+		
 	}
 	// Flushes all the table output after all the plans output.
 	w.Flush()
